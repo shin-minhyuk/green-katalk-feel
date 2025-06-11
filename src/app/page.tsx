@@ -1,11 +1,12 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import HeroSection from "@/components/HeroSection";
-import ExamplesSection from "@/components/ExamplesSection";
-import PreviewSection from "@/components/PreviewSection";
-import GreenieIntroSection from "@/components/GreenieIntroSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import ShareSection from "@/components/ShareSection";
+import { Header, Footer } from "@/components/common";
+import {
+  HeroSection,
+  CoachingExamplesSection,
+  PreviewSection,
+  GreenieIntroSection,
+  HowItWorksSection,
+  ShareSection,
+} from "@/components/home";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
-        <ExamplesSection />
+        <CoachingExamplesSection />
         <PreviewSection />
         <GreenieIntroSection />
         <HowItWorksSection />

@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
 
-export default function Header() {
+export function Header() {
   return (
     <header className="sticky top-0 z-20 w-full border-b bg-background/70 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
@@ -18,7 +19,8 @@ export default function Header() {
           </Link>
           <Button asChild size="sm" variant="ghost">
             <Link href="https://github.com/your-repo" target="_blank">
-              GitHub
+              <Github className="size-4" />
+              <span className="sr-only">GitHub</span>
             </Link>
           </Button>
         </nav>
