@@ -1,196 +1,217 @@
-// "use client";
-// import { motion } from "framer-motion";
-
-// const EXAMPLES = ["ㅇㅋ", "그래^^", "아~ 그렇구나", "ㅇㅇ", "웅 알았어"];
-
-// export default function ExamplesSection() {
-//   return (
-//     <section className="mx-auto max-w-6xl px-4 py-20" id="examples">
-//       <h2 className="mb-10 text-center text-3xl font-bold md:text-4xl">
-//         이런 말, 쎄~하지 않나요?
-//       </h2>
-//       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-//         {EXAMPLES.map((text, idx) => (
-//           <motion.div
-//             key={text}
-//             initial={{ opacity: 0, y: 20 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.4, delay: idx * 0.1 }}
-//             viewport={{ once: true }}
-//             whileHover={{ scale: 1.05, y: -5 }}
-//             className="group relative cursor-pointer overflow-hidden rounded-lg border bg-background p-6 text-center shadow transition-all hover:border-primary hover:shadow-lg"
-//           >
-//             <p className="text-lg font-semibold">{text}</p>
-//             <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-secondary/95 px-4 text-sm font-medium text-secondary-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-//               그린이: 이건 노란불이에요!
-//             </div>
-//           </motion.div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
-// "use client";
-
-// import { motion } from "framer-motion";
-
-// const EXAMPLES = [
-//   { text: "ㅇㅋ", emoji: "😐" },
-//   { text: "그래^^", emoji: "😅" },
-//   { text: "아~ 그렇구나", emoji: "🤨" },
-//   { text: "ㅇㅇ", emoji: "😶" },
-//   { text: "웅 알았어", emoji: "🙂" },
-// ];
-
-// export default function ExamplesSection() {
-//   return (
-//     <section className="mx-auto max-w-6xl px-4 py-20" id="examples">
-//       {/* 제목 */}
-//       <h2 className="mb-10 text-center text-3xl font-bold md:text-4xl">
-//         이런 말, 쎄~하지 않나요?
-//       </h2>
-
-//       {/* 카드 리스트 */}
-//       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-//         {EXAMPLES.map(({ text, emoji }, idx) => (
-//           <motion.div
-//             key={text}
-//             initial={{ opacity: 0, y: 20 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.4, delay: idx * 0.1 }}
-//             viewport={{ once: true }}
-//             whileHover={{ scale: 1.05, rotate: -1 }}
-//             className="group relative cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-tr from-green-50 to-white p-6 text-center shadow hover:shadow-xl hover:ring-2 hover:ring-yellow-300 transition-all"
-//           >
-//             {/* 대화 예시 + 이모지 */}
-//             <p className="text-xl font-bold">
-//               {emoji} {text}
-//             </p>
-
-//             {/* 그린이 말풍선 */}
-//             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-yellow-100 text-yellow-900 px-3 py-1 rounded-full text-xs font-medium shadow-md transition-opacity opacity-0 group-hover:opacity-100">
-//               그린이: 이건 노란불이에요!
-//             </div>
-//           </motion.div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
-// "use client";
-
-// import { motion } from "framer-motion";
-
-// const EXAMPLES = [
-//   { text: "ㅇㅋ", emoji: "😐" },
-//   { text: "그래^^", emoji: "😅" },
-//   { text: "아~ 그렇구나", emoji: "🤨" },
-//   { text: "ㅇㅇ", emoji: "😶" },
-//   { text: "웅 알았어", emoji: "🙂" },
-// ];
-
-// export default function ExamplesSection() {
-//   return (
-//     <section className="mx-auto max-w-3xl px-4 py-20" id="examples">
-//       <h2 className="mb-10 text-center text-3xl font-bold md:text-4xl">
-//         이런 말, 쎄~하지 않나요?
-//       </h2>
-
-//       <div className="space-y-6">
-//         {EXAMPLES.map(({ text, emoji }, idx) => (
-//           <motion.div
-//             key={text}
-//             initial={{ opacity: 0, y: 20 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.4, delay: idx * 0.1 }}
-//             viewport={{ once: true }}
-//             className="space-y-2"
-//           >
-//             {/* 사용자 메시지 */}
-//             <div className="flex justify-end">
-//               <div className="rounded-xl bg-gray-200 px-4 py-2 text-sm max-w-[70%]">
-//                 {emoji} {text}
-//               </div>
-//             </div>
-
-//             {/* 그린이 답변 */}
-//             <div className="flex justify-start items-center gap-2">
-//               <div className="rounded-xl bg-green-100 px-4 py-2 text-sm text-green-800 max-w-[70%] shadow">
-//                 그린이: 이건 노란불이에요!
-//               </div>
-//             </div>
-//           </motion.div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 
 import { motion } from "framer-motion";
-import { Bot } from "lucide-react";
+import {
+  Bot,
+  MessageCircle,
+  Sparkles,
+  ArrowRight,
+  ThumbsUp,
+  AlertTriangle,
+} from "lucide-react";
 
 const EXAMPLES = [
   {
     original: "ㅇㅋ 알겠어",
     suggestion: "오케이! 나중에 얘기해보자 :)",
     comment: "이건 살짝 무심하게 들릴 수 있어요!",
+    severity: "medium" as const,
+    category: "단답형",
   },
   {
     original: "그래^^",
     suggestion: "고마워~ 진짜 도움 됐어!",
     comment: "이모티콘 조합이 삐딱하게 보일 수 있어요!",
+    severity: "high" as const,
+    category: "이모티콘",
   },
   {
     original: "ㅇㅇ",
     suggestion: "응응! 알았어~ 나중에 또 얘기하자",
     comment: "단답은 오해를 불러일으킬 수 있어요!",
+    severity: "high" as const,
+    category: "단답형",
   },
 ];
 
+const getSeverityColor = (severity: "high" | "medium" | "low") => {
+  switch (severity) {
+    case "high":
+      return "text-red-600 bg-red-50";
+    case "medium":
+      return "text-orange-600 bg-orange-50";
+    case "low":
+      return "text-yellow-600 bg-yellow-50";
+  }
+};
+
+const getSeverityIcon = (severity: "high" | "medium" | "low") => {
+  switch (severity) {
+    case "high":
+      return AlertTriangle;
+    case "medium":
+      return MessageCircle;
+    case "low":
+      return ThumbsUp;
+  }
+};
+
 export function CoachingExamplesSection() {
   return (
-    <section
-      className="mx-auto max-w-2xl px-4 py-20 space-y-12"
-      id="coaching-examples"
-    >
-      <h2 className="text-center text-3xl font-bold md:text-4xl mb-6">
-        이렇게 말해보는 건 어때요?
-      </h2>
+    <section className="mx-auto max-w-4xl px-6 py-20" id="coaching-examples">
+      {/* 헤더 섹션 */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-center mb-16"
+      >
+        <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full mb-4">
+          <Sparkles className="w-6 h-6 text-green-600" />
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4">
+          이렇게 말해보는 건 어때요?
+        </h2>
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          AI가 분석한 감정 온도를 바탕으로 더 따뜻한 소통 방법을 제안해드려요
+        </p>
+      </motion.div>
 
-      {EXAMPLES.map(({ original, suggestion, comment }, idx) => (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: idx * 0.1 }}
-          viewport={{ once: true }}
-          className="flex flex-col gap-2 sm:gap-4"
-        >
-          {/* 잘못된 말 (왼쪽) */}
-          <div className="flex justify-start">
-            <div className="bg-gray-200 text-black px-4 py-2 rounded-2xl max-w-xs text-sm shadow-sm">
-              {original}
-            </div>
-          </div>
+      {/* 예시들 */}
+      <div className="space-y-12">
+        {EXAMPLES.map(
+          ({ original, suggestion, comment, severity, category }, idx) => {
+            const SeverityIcon = getSeverityIcon(severity);
 
-          {/* 그린이 코멘트 (가운데) */}
-          <div className="flex items-center justify-center text-xs text-gray-600 gap-2">
-            <Bot className="w-4 h-4 text-green-500" />
-            <span>{comment}</span>
-          </div>
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300"
+              >
+                {/* 카테고리 태그 */}
+                <div className="flex justify-center mb-6">
+                  <span className="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-medium rounded-full">
+                    {category} 개선 사례
+                  </span>
+                </div>
 
-          {/* 추천 말투 (오른쪽) */}
-          <div className="flex justify-end">
-            <div className="bg-green-100 text-green-900 px-4 py-2 rounded-2xl max-w-xs text-sm shadow-sm">
-              {suggestion}
-            </div>
-          </div>
-        </motion.div>
-      ))}
+                {/* 대화 영역 */}
+                <div className="space-y-6">
+                  {/* 원본 메시지 (왼쪽) */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.2 + 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex justify-start"
+                  >
+                    <div className="relative max-w-xs">
+                      <div className="bg-gradient-to-r from-gray-100 to-gray-50 text-gray-800 px-6 py-4 rounded-2xl shadow-sm border border-gray-200">
+                        <p className="font-medium">{original}</p>
+                      </div>
+                      <div className="absolute -bottom-2 left-4 w-4 h-4 bg-gray-100 rotate-45 border-r border-b border-gray-200"></div>
+                    </div>
+                  </motion.div>
+
+                  {/* AI 코멘트 (가운데) */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: idx * 0.2 + 0.2 }}
+                    viewport={{ once: true }}
+                    className="flex items-center justify-center"
+                  >
+                    <div
+                      className={`flex items-center gap-3 px-4 py-3 rounded-full ${getSeverityColor(severity)} border border-current/20`}
+                    >
+                      <div className="p-1.5 bg-white/80 rounded-full">
+                        <Bot
+                          className={`w-4 h-4 ${getSeverityColor(severity)}`}
+                        />
+                      </div>
+                      <span className="text-sm font-medium">{comment}</span>
+                      <SeverityIcon className="w-4 h-4" />
+                    </div>
+                  </motion.div>
+
+                  {/* 화살표 */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: idx * 0.2 + 0.3 }}
+                    viewport={{ once: true }}
+                    className="flex justify-center"
+                  >
+                    <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full shadow-lg">
+                      <ArrowRight className="w-5 h-5 text-white" />
+                    </div>
+                  </motion.div>
+
+                  {/* 개선된 메시지 (오른쪽) */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.2 + 0.4 }}
+                    viewport={{ once: true }}
+                    className="flex justify-end"
+                  >
+                    <div className="relative max-w-xs">
+                      <div className="bg-gradient-to-r from-green-100 to-emerald-50 text-green-900 px-6 py-4 rounded-2xl shadow-sm border border-green-200">
+                        <p className="font-medium">{suggestion}</p>
+                      </div>
+                      <div className="absolute -bottom-2 right-4 w-4 h-4 bg-green-100 rotate-45 border-r border-b border-green-200"></div>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* 개선 포인트 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.2 + 0.5 }}
+                  viewport={{ once: true }}
+                  className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 border border-blue-100"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <ThumbsUp className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm font-semibold text-blue-800">
+                      개선 포인트
+                    </span>
+                  </div>
+                  <p className="text-sm text-blue-700 leading-relaxed">
+                    {idx === 0 &&
+                      "감정을 더 구체적으로 표현하고 이모지를 활용해 친근함을 더했어요."}
+                    {idx === 1 &&
+                      "진심이 담긴 감사 표현으로 바꿔 오해의 소지를 줄였어요."}
+                    {idx === 2 &&
+                      "단답 대신 대화를 이어갈 수 있는 표현을 추가했어요."}
+                  </p>
+                </motion.div>
+              </motion.div>
+            );
+          }
+        )}
+      </div>
+
+      {/* 하단 CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        viewport={{ once: true }}
+        className="text-center mt-16"
+      >
+        <div className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+          <Bot className="w-5 h-5" />
+          <span className="font-semibold">내 메시지도 분석해보기</span>
+          <Sparkles className="w-4 h-4" />
+        </div>
+      </motion.div>
     </section>
   );
 }
