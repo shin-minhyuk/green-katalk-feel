@@ -79,8 +79,8 @@ const TONE_CASES: ToneCase[] = [
 
 export function ToneMisunderstanding() {
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-purple-50 to-white">
-      <div className="w-full max-w-4xl mx-auto p-6 ">
+    <div className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-purple-50 to-white px-6 py-12">
+      <div className="w-full max-w-4xl mx-auto">
         {/* 헤더 섹션 */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
@@ -186,7 +186,7 @@ export function ToneMisunderstanding() {
                   </CardContent>
                 </Card>
               </TabsContent>
-            )
+            ),
           )}
         </Tabs>
 
