@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import type React from "react";
+
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +23,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowLeft,
+  Heart,
+  Users,
+  Calendar,
+  MessageCircle,
+  HelpCircle,
+  MessageSquare,
+  Bot,
+  Sparkles,
+} from "lucide-react";
 
 const STEPS = [
   {
@@ -31,6 +44,10 @@ const STEPS = [
     field: "relation",
     type: "select",
     options: ["연인", "썸", "친구", "동료", "가족", "기타"],
+    icon: Users,
+    color: "text-pink-600",
+    bgColor: "bg-pink-100",
+    gradient: "from-pink-500 to-rose-500",
   },
   {
     id: 2,
@@ -46,6 +63,10 @@ const STEPS = [
       "갈등/문제 해결",
       "기타",
     ],
+    icon: Calendar,
+    color: "text-blue-600",
+    bgColor: "bg-blue-100",
+    gradient: "from-blue-500 to-indigo-500",
   },
   {
     id: 3,
@@ -54,6 +75,10 @@ const STEPS = [
     field: "mood",
     type: "select",
     options: ["아주 좋음", "좋음", "평범함", "어색함", "냉랭함/싸움", "기타"],
+    icon: Heart,
+    color: "text-purple-600",
+    bgColor: "bg-purple-100",
+    gradient: "from-purple-500 to-violet-500",
   },
   {
     id: 4,
@@ -61,6 +86,10 @@ const STEPS = [
     description: "대화에서 가장 마음에 걸리는 메시지는 무엇인가요?",
     field: "worrying_message",
     type: "text",
+    icon: MessageCircle,
+    color: "text-amber-600",
+    bgColor: "bg-amber-100",
+    gradient: "from-amber-500 to-yellow-500",
   },
   {
     id: 5,
@@ -68,6 +97,10 @@ const STEPS = [
     description: "이 대화를 통해 무엇을 알고 싶으신가요?",
     field: "question",
     type: "text",
+    icon: HelpCircle,
+    color: "text-emerald-600",
+    bgColor: "bg-emerald-100",
+    gradient: "from-emerald-500 to-green-500",
   },
   {
     id: 6,
@@ -75,6 +108,10 @@ const STEPS = [
     description: "분석하고 싶은 카카오톡 대화 내용을 붙여넣어 주세요.",
     field: "conversation",
     type: "textarea",
+    icon: MessageSquare,
+    color: "text-yellow-600",
+    bgColor: "bg-yellow-100",
+    gradient: "from-yellow-500 to-orange-500",
   },
 ];
 
@@ -88,6 +125,13 @@ export default function AnalyzerQuestionnaire() {
     question: "",
     conversation: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // 진행률 계산
+    setProgress(((currentStep + 1) / STEPS.length) * 100);
+  }, [currentStep]);
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -107,113 +151,254 @@ export default function AnalyzerQuestionnaire() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     console.log("Form Data Submitted: ", formData);
-    // TODO: API call logic
+
+    // 분석 시뮬레이션
+    setTimeout(() => {
+      setIsLoading(false);
+      // TODO: 실제 API 호출 및 결과 페이지로 이동
+    }, 2000);
   };
 
   const currentStepData = STEPS[currentStep];
   const currentValue = formData[currentStepData.field as keyof typeof formData];
   const isNextDisabled = !currentValue?.trim();
+  const Icon = currentStepData.icon;
 
   return (
-    <Card className="w-full max-w-2xl overflow-hidden">
-      <CardHeader>
-        <CardTitle>{currentStepData.title}</CardTitle>
-        <CardDescription>{currentStepData.description}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <AnimatePresence mode="wait">
+    <div className="w-full max-w-3xl mx-auto">
+      {/* 진행 상태 표시 */}
+      <div className="mb-8">
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm font-medium text-gray-600">분석 설정</span>
+          <span className="text-sm font-medium text-gray-600">
+            {currentStep + 1} / {STEPS.length}
+          </span>
+        </div>
+        <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
           <motion.div
-            key={currentStep}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
+            className={`h-full bg-gradient-to-r ${currentStepData.gradient}`}
+            initial={{ width: `${(currentStep / STEPS.length) * 100}%` }}
+            animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3 }}
-          >
-            <div className="space-y-4">
-              {currentStepData.type === "select" && (
-                <div className="grid gap-2">
-                  <Label htmlFor={currentStepData.field}>
-                    {currentStepData.title}
-                  </Label>
-                  <Select
-                    onValueChange={(value) =>
-                      handleChange(currentStepData.field, value)
-                    }
-                    defaultValue={
-                      formData[currentStepData.field as keyof typeof formData]
-                    }
-                  >
-                    <SelectTrigger id={currentStepData.field}>
-                      <SelectValue placeholder="선택해주세요" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {currentStepData.options?.map((option) => (
-                        <SelectItem key={option} value={option}>
-                          {option}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
+          ></motion.div>
+        </div>
+      </div>
 
-              {currentStepData.type === "text" && (
-                <div className="grid gap-2">
-                  <Label htmlFor={currentStepData.field}>
-                    {currentStepData.title}
-                  </Label>
-                  <Input
-                    id={currentStepData.field}
-                    value={
-                      formData[currentStepData.field as keyof typeof formData]
-                    }
-                    onChange={(e) =>
-                      handleChange(currentStepData.field, e.target.value)
-                    }
-                    autoComplete="off"
-                  />
-                </div>
-              )}
+      <Card className="w-full overflow-hidden border-0 shadow-2xl bg-white/90 backdrop-blur-sm">
+        {/* 상단 그라데이션 바 */}
+        <div
+          className={`h-1.5 w-full bg-gradient-to-r ${currentStepData.gradient}`}
+        ></div>
 
-              {currentStepData.type === "textarea" && (
-                <div className="grid gap-2">
-                  <Label htmlFor={currentStepData.field}>
-                    {currentStepData.title}
-                  </Label>
-                  <Textarea
-                    id={currentStepData.field}
-                    value={
-                      formData[currentStepData.field as keyof typeof formData]
-                    }
-                    onChange={(e) =>
-                      handleChange(currentStepData.field, e.target.value)
-                    }
-                    rows={10}
-                    autoComplete="off"
-                  />
-                </div>
-              )}
+        <CardHeader className="relative pb-0">
+          <div className="flex items-center gap-3 mb-2">
+            <div
+              className={`p-3 rounded-xl ${currentStepData.bgColor} shadow-lg`}
+            >
+              <Icon className={`w-6 h-6 ${currentStepData.color}`} />
             </div>
-          </motion.div>
-        </AnimatePresence>
-      </CardContent>
-      <CardFooter className="justify-between">
-        <Button variant="ghost" onClick={prevStep} disabled={currentStep === 0}>
-          <ArrowLeft className="mr-2 size-4" />
-          이전
-        </Button>
-        {currentStep < STEPS.length - 1 ? (
-          <Button onClick={nextStep} disabled={isNextDisabled}>
-            다음
-            <ArrowRight className="ml-2 size-4" />
+            <div>
+              <CardTitle className="text-2xl font-bold">
+                {currentStepData.title}
+              </CardTitle>
+              <CardDescription className="text-base">
+                {currentStepData.description}
+              </CardDescription>
+            </div>
+          </div>
+
+          {/* 단계 인디케이터 */}
+          <div className="flex justify-center gap-1.5 mt-4">
+            {STEPS.map((step, idx) => (
+              <motion.div
+                key={step.id}
+                className={`h-1.5 rounded-full ${
+                  idx === currentStep
+                    ? `w-8 bg-gradient-to-r ${step.gradient}`
+                    : idx < currentStep
+                      ? "w-4 bg-gray-400"
+                      : "w-4 bg-gray-200"
+                }`}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: idx === currentStep ? 1 : 0.7 }}
+                transition={{ duration: 0.3 }}
+              ></motion.div>
+            ))}
+          </div>
+        </CardHeader>
+
+        <CardContent className="pt-8 pb-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="min-h-[200px]"
+            >
+              <div className="space-y-4">
+                {currentStepData.type === "select" && (
+                  <div className="grid gap-3">
+                    <Label
+                      htmlFor={currentStepData.field}
+                      className="text-base font-medium"
+                    >
+                      {currentStepData.title}
+                    </Label>
+                    <Select
+                      onValueChange={(value) =>
+                        handleChange(currentStepData.field, value)
+                      }
+                      defaultValue={
+                        formData[currentStepData.field as keyof typeof formData]
+                      }
+                    >
+                      <SelectTrigger
+                        id={currentStepData.field}
+                        className="h-14 px-4 text-base border-2 border-gray-200 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white transition-all duration-300"
+                      >
+                        <SelectValue placeholder="선택해주세요" />
+                      </SelectTrigger>
+                      <SelectContent className="border-2">
+                        {currentStepData.options?.map((option) => (
+                          <SelectItem
+                            key={option}
+                            value={option}
+                            className="text-base py-3 cursor-pointer"
+                          >
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+
+                {currentStepData.type === "text" && (
+                  <div className="grid gap-3">
+                    <Label
+                      htmlFor={currentStepData.field}
+                      className="text-base font-medium"
+                    >
+                      {currentStepData.title}
+                    </Label>
+                    <Input
+                      id={currentStepData.field}
+                      value={
+                        formData[currentStepData.field as keyof typeof formData]
+                      }
+                      onChange={(e) =>
+                        handleChange(currentStepData.field, e.target.value)
+                      }
+                      autoComplete="off"
+                      className="h-14 px-4 text-base border-2 border-gray-200 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white transition-all duration-300"
+                      placeholder="여기에 입력해주세요..."
+                    />
+                  </div>
+                )}
+
+                {currentStepData.type === "textarea" && (
+                  <div className="grid gap-3">
+                    <Label
+                      htmlFor={currentStepData.field}
+                      className="text-base font-medium"
+                    >
+                      {currentStepData.title}
+                    </Label>
+                    <Textarea
+                      id={currentStepData.field}
+                      value={
+                        formData[currentStepData.field as keyof typeof formData]
+                      }
+                      onChange={(e) =>
+                        handleChange(currentStepData.field, e.target.value)
+                      }
+                      rows={10}
+                      autoComplete="off"
+                      className="p-4 text-base border-2 border-gray-200 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white transition-all duration-300 resize-none"
+                      placeholder="카카오톡 대화 내용을 복사하여 붙여넣어 주세요..."
+                    />
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </CardContent>
+
+        <CardFooter className="justify-between border-t p-6">
+          <Button
+            variant="outline"
+            onClick={prevStep}
+            disabled={currentStep === 0}
+            className="border-2 hover:bg-gray-50 transition-all duration-300"
+          >
+            <ArrowLeft className="mr-2 size-4" />
+            이전
           </Button>
-        ) : (
-          <Button onClick={handleSubmit} disabled={isNextDisabled}>
-            분석하기
-          </Button>
-        )}
-      </CardFooter>
-    </Card>
+
+          {currentStep < STEPS.length - 1 ? (
+            <Button
+              onClick={nextStep}
+              disabled={isNextDisabled}
+              className={`bg-gradient-to-r ${currentStepData.gradient} hover:opacity-90 transition-all duration-300 border-0`}
+            >
+              다음
+              <ArrowRight className="ml-2 size-4" />
+            </Button>
+          ) : (
+            <Button
+              onClick={handleSubmit}
+              disabled={isNextDisabled || isLoading}
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:opacity-90 transition-all duration-300 border-0"
+            >
+              {isLoading ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  분석 중...
+                </>
+              ) : (
+                <>
+                  <Bot className="mr-2 size-4" />
+                  분석하기
+                  <Sparkles className="ml-2 size-4" />
+                </>
+              )}
+            </Button>
+          )}
+        </CardFooter>
+      </Card>
+
+      {/* 도움말 */}
+      <div className="mt-6 text-center">
+        <p className="text-sm text-gray-500">
+          입력하신 정보는 더 정확한 감정 분석을 위해서만 사용됩니다.
+          <br />
+          <span className="text-green-600">개인정보는 안전하게 보호</span>
+          됩니다.
+        </p>
+      </div>
+    </div>
   );
 }
