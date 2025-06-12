@@ -67,15 +67,15 @@ export function HowItWorksSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-blue-100 to-green-100 rounded-full mb-4">
-            <Sparkles className="w-6 h-6 text-blue-600" />
+          <div className="mb-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-100 to-green-100 p-2">
+            <Sparkles className="h-6 w-6 text-blue-600" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
+          <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
             어떻게 작동하나요?
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
             그린이 감정분석기는 AI 기술을 활용해 대화의 감정 온도를 분석하고 더
             나은 소통을 돕습니다
           </p>
@@ -84,9 +84,9 @@ export function HowItWorksSection() {
         {/* 프로세스 단계 */}
         <div className="relative">
           {/* 연결선 (데스크탑) */}
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-yellow-300 via-blue-300 to-green-300 transform -translate-y-1/2 rounded-full"></div>
+          <div className="absolute top-1/2 left-0 hidden h-1 w-full -translate-y-1/2 transform rounded-full bg-gradient-to-r from-yellow-300 via-blue-300 to-green-300 md:block"></div>
 
-          <div className="flex flex-col md:flex-row items-stretch gap-8 md:gap-6">
+          <div className="flex flex-col items-stretch gap-8 md:flex-row md:gap-6">
             {STEPS.map((step, idx) => {
               const Icon = step.icon;
               const isLast = idx === STEPS.length - 1;
@@ -98,16 +98,16 @@ export function HowItWorksSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: idx * 0.2 }}
                   viewport={{ once: true }}
-                  className="flex w-full flex-col relative"
+                  className="relative flex w-full flex-col"
                 >
                   {/* 단계 번호 */}
-                  <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center text-sm font-bold z-10">
+                  <div className="absolute -top-4 -left-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold shadow-lg">
                     {idx + 1}
                   </div>
 
                   {/* 카드 */}
                   <div
-                    className={`flex h-full flex-col rounded-3xl bg-gradient-to-br ${step.bgColor} border border-white/50 p-8 shadow-xl backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]`}
+                    className={`flex h-full flex-col rounded-3xl bg-gradient-to-br ${step.bgColor} border border-white/50 p-8 shadow-xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl`}
                   >
                     {/* 아이콘 */}
                     <div className="mb-6 flex justify-center">
@@ -122,29 +122,29 @@ export function HowItWorksSection() {
 
                     {/* 제목 */}
                     <h3
-                      className={`mb-3 text-center text-2xl font-bold bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}
+                      className={`mb-3 bg-gradient-to-r text-center text-2xl font-bold ${step.color} bg-clip-text text-transparent`}
                     >
                       {step.title}
                     </h3>
 
                     {/* 짧은 설명 */}
-                    <p className="text-center text-gray-700 mb-6">
+                    <p className="mb-6 text-center text-gray-700">
                       {step.desc}
                     </p>
 
                     {/* 구분선 */}
-                    <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent my-4"></div>
+                    <div className="my-4 h-px w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
 
                     {/* 긴 설명 */}
-                    <p className="text-sm text-gray-600 mb-6 flex-grow">
+                    <p className="mb-6 flex-grow text-sm text-gray-600">
                       {step.longDesc}
                     </p>
 
                     {/* 하이라이트 */}
                     <div
-                      className={`rounded-xl bg-white/70 p-4 shadow-inner border border-white/80 mb-4`}
+                      className={`mb-4 rounded-xl border border-white/80 bg-white/70 p-4 shadow-inner`}
                     >
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="mb-2 flex items-center gap-2">
                         <Sparkles className="h-4 w-4 text-blue-500" />
                         <span className="text-sm font-semibold text-gray-800">
                           핵심 포인트
@@ -156,15 +156,15 @@ export function HowItWorksSection() {
                     </div>
 
                     {/* 예시 */}
-                    <div className="bg-white/50 rounded-xl p-4 border border-gray-100">
-                      <p className="text-xs text-gray-500 mb-1">예시</p>
+                    <div className="rounded-xl border border-gray-100 bg-white/50 p-4">
+                      <p className="mb-1 text-xs text-gray-500">예시</p>
                       <p className="text-sm text-gray-800">{step.example}</p>
                     </div>
 
                     {/* 화살표 (모바일) */}
                     {!isLast && (
-                      <div className="flex justify-center mt-6 md:hidden">
-                        <div className="p-2 bg-white rounded-full shadow-md">
+                      <div className="mt-6 flex justify-center md:hidden">
+                        <div className="rounded-full bg-white p-2 shadow-md">
                           <ArrowRight className="h-5 w-5 text-blue-500" />
                         </div>
                       </div>
@@ -173,13 +173,13 @@ export function HowItWorksSection() {
 
                   {/* 화살표 (데스크탑) */}
                   {!isLast && (
-                    <div className="hidden md:flex absolute top-1/2 -right-12 transform -translate-y-1/2 z-10 justify-center items-center">
+                    <div className="absolute top-1/2 -right-12 z-10 hidden -translate-y-1/2 transform items-center justify-center md:flex">
                       <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{ delay: idx * 0.2 + 0.4, duration: 0.4 }}
                         viewport={{ once: true }}
-                        className="p-3 bg-white rounded-full shadow-lg"
+                        className="rounded-full bg-white p-3 shadow-lg"
                       >
                         <ArrowRight className="h-5 w-5 text-blue-500" />
                       </motion.div>
@@ -197,10 +197,10 @@ export function HowItWorksSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="mt-16 text-center"
         >
-          <button className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-            <BrainCircuit className="w-5 h-5" />
+          <button className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-green-500 px-8 py-4 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            <BrainCircuit className="h-5 w-5" />
             <span className="font-semibold">지금 바로 분석해보기</span>
           </button>
         </motion.div>

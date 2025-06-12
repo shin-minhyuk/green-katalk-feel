@@ -9,7 +9,7 @@ export function ShareSection() {
       <h2 className="mb-6 text-3xl font-bold md:text-4xl">
         친구도 감정 분석 해보게 알려주세요!
       </h2>
-      <p className="mb-10 text-muted-foreground">
+      <p className="text-muted-foreground mb-10">
         재미있는 결과가 나왔다면 공유 버튼으로 바로 퍼가세요 🚀
       </p>
       <motion.div

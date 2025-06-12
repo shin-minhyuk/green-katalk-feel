@@ -167,16 +167,16 @@ export default function AnalyzerQuestionnaire() {
   const Icon = currentStepData.icon;
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="mx-auto w-full max-w-3xl">
       {/* 진행 상태 표시 */}
       <div className="mb-8">
-        <div className="flex justify-between items-center mb-2">
+        <div className="mb-2 flex items-center justify-between">
           <span className="text-sm font-medium text-gray-600">분석 설정</span>
           <span className="text-sm font-medium text-gray-600">
             {currentStep + 1} / {STEPS.length}
           </span>
         </div>
-        <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
           <motion.div
             className={`h-full bg-gradient-to-r ${currentStepData.gradient}`}
             initial={{ width: `${(currentStep / STEPS.length) * 100}%` }}
@@ -186,18 +186,18 @@ export default function AnalyzerQuestionnaire() {
         </div>
       </div>
 
-      <Card className="w-full overflow-hidden border-0 shadow-2xl bg-white/90 backdrop-blur-sm">
+      <Card className="w-full overflow-hidden border-0 bg-white/90 shadow-2xl backdrop-blur-sm">
         {/* 상단 그라데이션 바 */}
         <div
           className={`h-1.5 w-full bg-gradient-to-r ${currentStepData.gradient}`}
         ></div>
 
         <CardHeader className="relative pb-0">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="mb-2 flex items-center gap-3">
             <div
-              className={`p-3 rounded-xl ${currentStepData.bgColor} shadow-lg`}
+              className={`rounded-xl p-3 ${currentStepData.bgColor} shadow-lg`}
             >
-              <Icon className={`w-6 h-6 ${currentStepData.color}`} />
+              <Icon className={`h-6 w-6 ${currentStepData.color}`} />
             </div>
             <div>
               <CardTitle className="text-2xl font-bold">
@@ -210,7 +210,7 @@ export default function AnalyzerQuestionnaire() {
           </div>
 
           {/* 단계 인디케이터 */}
-          <div className="flex justify-center gap-1.5 mt-4">
+          <div className="mt-4 flex justify-center gap-1.5">
             {STEPS.map((step, idx) => (
               <motion.div
                 key={step.id}
@@ -258,7 +258,7 @@ export default function AnalyzerQuestionnaire() {
                     >
                       <SelectTrigger
                         id={currentStepData.field}
-                        className="h-14 px-4 text-base border-2 border-gray-200 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white transition-all duration-300"
+                        className="h-14 border-2 border-gray-200 px-4 text-base transition-all duration-300 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white"
                       >
                         <SelectValue placeholder="선택해주세요" />
                       </SelectTrigger>
@@ -267,7 +267,7 @@ export default function AnalyzerQuestionnaire() {
                           <SelectItem
                             key={option}
                             value={option}
-                            className="text-base py-3 cursor-pointer"
+                            className="cursor-pointer py-3 text-base"
                           >
                             {option}
                           </SelectItem>
@@ -294,7 +294,7 @@ export default function AnalyzerQuestionnaire() {
                         handleChange(currentStepData.field, e.target.value)
                       }
                       autoComplete="off"
-                      className="h-14 px-4 text-base border-2 border-gray-200 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white transition-all duration-300"
+                      className="h-14 border-2 border-gray-200 px-4 text-base transition-all duration-300 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white"
                       placeholder="여기에 입력해주세요..."
                     />
                   </div>
@@ -318,7 +318,7 @@ export default function AnalyzerQuestionnaire() {
                       }
                       rows={10}
                       autoComplete="off"
-                      className="p-4 text-base border-2 border-gray-200 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white transition-all duration-300 resize-none"
+                      className="resize-none border-2 border-gray-200 p-4 text-base transition-all duration-300 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white"
                       placeholder="카카오톡 대화 내용을 복사하여 붙여넣어 주세요..."
                     />
                   </div>
@@ -333,7 +333,7 @@ export default function AnalyzerQuestionnaire() {
             variant="outline"
             onClick={prevStep}
             disabled={currentStep === 0}
-            className="border-2 hover:bg-gray-50 transition-all duration-300"
+            className="border-2 transition-all duration-300 hover:bg-gray-50"
           >
             <ArrowLeft className="mr-2 size-4" />
             이전
@@ -343,7 +343,7 @@ export default function AnalyzerQuestionnaire() {
             <Button
               onClick={nextStep}
               disabled={isNextDisabled}
-              className={`bg-gradient-to-r ${currentStepData.gradient} hover:opacity-90 transition-all duration-300 border-0`}
+              className={`bg-gradient-to-r ${currentStepData.gradient} border-0 transition-all duration-300 hover:opacity-90`}
             >
               다음
               <ArrowRight className="ml-2 size-4" />
@@ -352,12 +352,12 @@ export default function AnalyzerQuestionnaire() {
             <Button
               onClick={handleSubmit}
               disabled={isNextDisabled || isLoading}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:opacity-90 transition-all duration-300 border-0"
+              className="border-0 bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-300 hover:opacity-90"
             >
               {isLoading ? (
                 <>
                   <svg
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    className="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

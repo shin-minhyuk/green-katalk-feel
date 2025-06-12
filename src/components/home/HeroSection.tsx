@@ -136,7 +136,7 @@ export function HeroSection() {
               top: "50%",
             }}
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg border border-white/50">
+            <div className="rounded-full border border-white/50 bg-white/80 px-3 py-1 shadow-lg backdrop-blur-sm">
               {msg.text}
             </div>
           </motion.div>
@@ -145,7 +145,7 @@ export function HeroSection() {
 
       {/* 마우스 따라다니는 효과 */}
       <motion.div
-        className="absolute pointer-events-none"
+        className="pointer-events-none absolute"
         animate={{
           x: mousePosition.x - 400,
           y: mousePosition.y - 400,
@@ -157,7 +157,7 @@ export function HeroSection() {
 
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 max-w-6xl mx-auto"
+        className="relative z-10 mx-auto max-w-6xl"
       >
         {/* 상단 배지 */}
         <motion.div
@@ -166,19 +166,19 @@ export function HeroSection() {
           transition={{ duration: 0.6 }}
           className="mb-2"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full shadow-lg border border-green-200/50 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-green-200/50 bg-gradient-to-r from-green-100 to-emerald-100 px-6 py-3 shadow-lg backdrop-blur-sm">
             <div className="relative">
-              <Bot className="w-5 h-5 text-green-600" />
+              <Bot className="h-5 w-5 text-green-600" />
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"
+                className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-green-500"
               ></motion.div>
             </div>
-            <span className="text-green-700 font-semibold text-sm">
+            <span className="text-sm font-semibold text-green-700">
               🌱 연애코치 그린이와 함께하는 감정 분석
             </span>
-            <Sparkles className="w-4 h-4 text-green-600" />
+            <Sparkles className="h-4 w-4 text-green-600" />
           </div>
         </motion.div>
 
@@ -189,8 +189,8 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4">
-            <span className="block mb-2">
+          <h1 className="mb-4 text-4xl leading-tight font-extrabold tracking-tight md:text-6xl">
+            <span className="mb-2 block">
               <span className="bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
                 그린이
               </span>
@@ -210,7 +210,7 @@ export function HeroSection() {
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.8, repeat: Number.POSITIVE_INFINITY }}
-                className="inline-block w-1 h-16 bg-blue-600 ml-1"
+                className="ml-1 inline-block h-16 w-1 bg-blue-600"
               ></motion.span>
             </div>
           </h1>
@@ -221,7 +221,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-12 max-w-2xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed"
+          className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl"
         >
           <span className="font-semibold text-gray-800">
             카카오톡 속 말투, 감정, 뉘앙스까지!
@@ -229,7 +229,7 @@ export function HeroSection() {
           <br />
           AI가 대화의 진짜 의미를 읽어드립니다. 🔍✨
           <br />
-          <span className="text-green-600 font-medium">
+          <span className="font-medium text-green-600">
             더 이상 오해하지 마세요!
           </span>
         </motion.p>
@@ -239,17 +239,17 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mb-16 flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Button
             size="lg"
             asChild
-            className="px-8 py-6 text-lg font-semibold bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+            className="bg-gradient-to-r from-green-500 to-emerald-500 px-8 py-6 text-lg font-semibold shadow-xl transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-emerald-600 hover:shadow-2xl"
           >
             <Link href="/analyzer" className="flex items-center gap-2">
-              <MessageCircle className="w-5 h-5" />
+              <MessageCircle className="h-5 w-5" />
               감정 분석하러 가기
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="h-4 w-4" />
             </Link>
           </Button>
 
@@ -257,10 +257,10 @@ export function HeroSection() {
             size="lg"
             variant="outline"
             asChild
-            className="px-8 py-6 text-lg font-semibold border-2 border-green-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300"
+            className="border-2 border-green-200 px-8 py-6 text-lg font-semibold transition-all duration-300 hover:border-green-300 hover:bg-green-50"
           >
             <Link href="/guide" className="flex items-center gap-2">
-              <Bot className="w-5 h-5" />
+              <Bot className="h-5 w-5" />
               사용법 알아보기
             </Link>
           </Button>
@@ -271,7 +271,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto"
+          className="mx-auto grid max-w-2xl grid-cols-1 gap-8 sm:grid-cols-3"
         >
           {STATS.map((stat, idx) => {
             const Icon = stat.icon;
@@ -279,14 +279,14 @@ export function HeroSection() {
               <motion.div
                 key={idx}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50"
+                className="rounded-2xl border border-white/50 bg-white/60 p-6 shadow-lg backdrop-blur-sm"
               >
-                <div className="flex items-center justify-center mb-3">
-                  <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full">
-                    <Icon className="w-6 h-6 text-white" />
+                <div className="mb-3 flex items-center justify-center">
+                  <div className="rounded-full bg-gradient-to-r from-green-500 to-emerald-500 p-3">
+                    <Icon className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-gray-800 mb-1">
+                <div className="mb-1 text-2xl font-bold text-gray-800">
                   {stat.value}
                 </div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
@@ -306,7 +306,7 @@ export function HeroSection() {
             {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
-                className="w-8 h-8 rounded-full bg-gradient-to-r from-green-400 to-blue-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold"
+                className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-gradient-to-r from-green-400 to-blue-400 text-xs font-bold text-white"
               >
                 {String.fromCharCode(65 + i - 1)}
               </div>
@@ -316,7 +316,7 @@ export function HeroSection() {
             {[1, 2, 3, 4, 5].map((i) => (
               <Star
                 key={i}
-                className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                className="h-4 w-4 fill-yellow-400 text-yellow-400"
               />
             ))}
           </div>
@@ -329,17 +329,17 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        className="absolute z-10 bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transform"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-          className="w-6 h-10 border-2 border-green-400 rounded-full flex justify-center"
+          className="flex h-10 w-6 justify-center rounded-full border-2 border-green-400"
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            className="w-1 h-3 bg-green-400 rounded-full mt-2"
+            className="mt-2 h-3 w-1 rounded-full bg-green-400"
           ></motion.div>
         </motion.div>
       </motion.div>

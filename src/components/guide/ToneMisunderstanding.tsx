@@ -80,10 +80,10 @@ const TONE_CASES: ToneCase[] = [
 export function ToneMisunderstanding() {
   return (
     <div className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-purple-50 to-white px-6 py-12">
-      <div className="w-full max-w-4xl mx-auto">
+      <div className="mx-auto w-full max-w-4xl">
         {/* 헤더 섹션 */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+        <div className="mb-8 text-center">
+          <h1 className="mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-3xl font-bold text-transparent">
             💬 말투 오해 방지 가이드
           </h1>
           <p className="text-muted-foreground text-lg">
@@ -93,15 +93,15 @@ export function ToneMisunderstanding() {
 
         <Tabs defaultValue={TONE_CASES[0].id} className="w-full">
           {/* 탭 트리거 - 더 세련된 디자인 */}
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 gap-2 bg-transparent h-auto p-1">
+          <TabsList className="grid h-auto w-full grid-cols-2 gap-2 bg-transparent p-1 lg:grid-cols-5">
             {TONE_CASES.map(({ id, label, icon: Icon, color }) => (
               <TabsTrigger
                 key={id}
                 value={id}
-                className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-primary/5 data-[state=active]:shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-md bg-white/50 backdrop-blur-sm"
+                className="data-[state=active]:border-primary data-[state=active]:bg-primary/5 flex flex-col items-center gap-2 rounded-xl border-2 border-transparent bg-white/50 p-4 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-md data-[state=active]:shadow-lg"
               >
-                <Icon className={`w-5 h-5 ${color}`} />
-                <span className="text-sm font-medium text-center leading-tight">
+                <Icon className={`h-5 w-5 ${color}`} />
+                <span className="text-center text-sm leading-tight font-medium">
                   {label}
                 </span>
               </TabsTrigger>
@@ -121,12 +121,12 @@ export function ToneMisunderstanding() {
             }) => (
               <TabsContent key={id} value={id} className="mt-8">
                 <Card
-                  className={`overflow-hidden border-0 shadow-2xl bg-gradient-to-br ${bgGradient} backdrop-blur-sm`}
+                  className={`overflow-hidden border-0 bg-gradient-to-br shadow-2xl ${bgGradient} backdrop-blur-sm`}
                 >
                   <CardHeader className="pb-4">
                     <div className="flex items-center gap-3">
-                      <div className={`p-3 rounded-full bg-white/80 shadow-lg`}>
-                        <Icon className={`w-6 h-6 ${color}`} />
+                      <div className={`rounded-full bg-white/80 p-3 shadow-lg`}>
+                        <Icon className={`h-6 w-6 ${color}`} />
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-gray-800">
@@ -142,25 +142,25 @@ export function ToneMisunderstanding() {
                   <CardContent className="space-y-6">
                     {/* 메시지 박스 */}
                     <div className="relative">
-                      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-white/20">
+                      <div className="rounded-2xl border border-white/20 bg-white/90 px-6 py-4 shadow-lg backdrop-blur-sm">
                         <p className="text-lg font-medium text-gray-800">
                           {message}
                         </p>
                       </div>
-                      <div className="absolute -bottom-2 left-6 w-4 h-4 bg-white/90 rotate-45 border-r border-b border-white/20"></div>
+                      <div className="absolute -bottom-2 left-6 h-4 w-4 rotate-45 border-r border-b border-white/20 bg-white/90"></div>
                     </div>
 
                     {/* 오해 섹션 */}
-                    <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-red-200/50">
+                    <div className="rounded-2xl border border-red-200/50 bg-white/60 p-6 backdrop-blur-sm">
                       <div className="flex items-start gap-3">
-                        <div className="p-2 rounded-full bg-red-100">
-                          <AlertTriangle className="w-5 h-5 text-red-600" />
+                        <div className="rounded-full bg-red-100 p-2">
+                          <AlertTriangle className="h-5 w-5 text-red-600" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-bold text-red-800 mb-2">
+                          <h4 className="mb-2 font-bold text-red-800">
                             상대방의 오해
                           </h4>
-                          <p className="text-red-700 text-lg font-medium italic">
+                          <p className="text-lg font-medium text-red-700 italic">
                             {misunderstanding}
                           </p>
                         </div>
@@ -168,16 +168,16 @@ export function ToneMisunderstanding() {
                     </div>
 
                     {/* 팁 섹션 */}
-                    <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-green-200/50">
+                    <div className="rounded-2xl border border-green-200/50 bg-white/60 p-6 backdrop-blur-sm">
                       <div className="flex items-start gap-3">
-                        <div className="p-2 rounded-full bg-green-100">
-                          <Lightbulb className="w-5 h-5 text-green-600" />
+                        <div className="rounded-full bg-green-100 p-2">
+                          <Lightbulb className="h-5 w-5 text-green-600" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-bold text-green-800 mb-2">
+                          <h4 className="mb-2 font-bold text-green-800">
                             💡 개선 팁
                           </h4>
-                          <p className="text-green-700 text-base leading-relaxed">
+                          <p className="text-base leading-relaxed text-green-700">
                             {tip}
                           </p>
                         </div>
@@ -192,8 +192,8 @@ export function ToneMisunderstanding() {
 
         {/* 푸터 */}
         <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg">
-            <MessageCircle className="w-5 h-5" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 text-white shadow-lg">
+            <MessageCircle className="h-5 w-5" />
             <span className="font-medium">소통이 더 원활해질 거예요! ✨</span>
           </div>
         </div>

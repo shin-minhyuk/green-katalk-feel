@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background/50 py-10 text-sm">
+    <footer className="bg-background/50 border-t py-10 text-sm">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex flex-col gap-2">
           <p className="font-semibold">그린이 감정분석기</p>

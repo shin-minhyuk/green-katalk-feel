@@ -50,20 +50,20 @@ export function FaqAccordion() {
   return (
     <section className="mx-auto max-w-4xl px-6 py-16">
       {/* 헤더 섹션 */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-violet-100 to-fuchsia-100 rounded-full mb-4">
-          <HelpCircle className="w-6 h-6 text-violet-600" />
+      <div className="mb-12 text-center">
+        <div className="mb-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-violet-100 to-fuchsia-100 p-2">
+          <HelpCircle className="h-6 w-6 text-violet-600" />
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+        <h2 className="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
           자주 묻는 질문
         </h2>
-        <p className="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">
+        <p className="text-muted-foreground mx-auto mt-3 max-w-2xl text-lg">
           서비스 이용 중 궁금한 점에 대한 답변을 찾아보세요
         </p>
       </div>
 
       {/* 아코디언 섹션 */}
-      <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-1 shadow-xl border border-gray-100">
+      <div className="rounded-3xl border border-gray-100 bg-white/50 p-1 shadow-xl backdrop-blur-sm">
         <Accordion type="single" collapsible className="w-full">
           {FAQS.map((item, i) => {
             const Icon = item.icon;
@@ -71,30 +71,30 @@ export function FaqAccordion() {
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
-                className={`mb-4 last:mb-0 overflow-hidden rounded-2xl border-0 bg-gradient-to-r ${item.gradient} shadow-sm transition-all duration-300 hover:shadow-md`}
+                className={`mb-4 overflow-hidden rounded-2xl border-0 bg-gradient-to-r last:mb-0 ${item.gradient} shadow-sm transition-all duration-300 hover:shadow-md`}
               >
-                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                <AccordionTrigger className="group px-6 py-5 hover:no-underline">
                   <div className="flex items-center gap-4 text-left">
                     <div
-                      className={`p-3 rounded-full bg-white/80 shadow-md ${item.color}`}
+                      className={`rounded-full bg-white/80 p-3 shadow-md ${item.color}`}
                     >
-                      <Icon className={`w-5 h-5 ${item.color}`} />
+                      <Icon className={`h-5 w-5 ${item.color}`} />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-800 group-hover:text-gray-900">
                       {item.q}
                     </h3>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6 pt-0">
+                <AccordionContent className="px-6 pt-0 pb-6">
                   <div className="pl-16">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-inner border border-gray-100">
-                      <p className="text-gray-700 leading-relaxed">{item.a}</p>
+                    <div className="rounded-xl border border-gray-100 bg-white/80 p-5 shadow-inner backdrop-blur-sm">
+                      <p className="leading-relaxed text-gray-700">{item.a}</p>
                     </div>
 
                     {/* 추가 액션 버튼 */}
                     <div className="mt-4 flex justify-end">
-                      <button className="inline-flex items-center gap-1 text-sm font-medium text-violet-600 hover:text-violet-800 transition-colors">
-                        <Shield className="w-4 h-4" />
+                      <button className="inline-flex items-center gap-1 text-sm font-medium text-violet-600 transition-colors hover:text-violet-800">
+                        <Shield className="h-4 w-4" />
                         <span>더 알아보기</span>
                       </button>
                     </div>
@@ -109,8 +109,8 @@ export function FaqAccordion() {
       {/* 추가 도움말 섹션 */}
       <div className="mt-10 text-center">
         <p className="text-muted-foreground">더 궁금한 점이 있으신가요?</p>
-        <button className="mt-2 inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-          <MessageCircle className="w-4 h-4" />
+        <button className="mt-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <MessageCircle className="h-4 w-4" />
           <span className="font-medium">문의하기</span>
         </button>
       </div>
