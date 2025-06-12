@@ -1,5 +1,9 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import type React from "react";
+
 import {
   Accordion,
   AccordionContent,
@@ -46,74 +50,256 @@ const FAQS: FAQ[] = [
   },
 ];
 
+// 애니메이션 variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const iconVariants = {
+  hidden: { scale: 0, rotate: -180 },
+  visible: {
+    scale: 1,
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 260,
+      damping: 20,
+    },
+  },
+  hover: {
+    scale: 1.1,
+    rotate: 5,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+const pulseVariants = {
+  pulse: {
+    scale: [1, 1.05, 1],
+    opacity: [0.7, 1, 0.7],
+    transition: {
+      duration: 2,
+      repeat: Number.POSITIVE_INFINITY,
+      ease: "easeInOut",
+    },
+  },
+};
+
 export function FaqAccordion() {
+  const [openItems, setOpenItems] = useState<string[]>([]);
+
+  const handleToggle = (value: string) => {
+    setOpenItems((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value],
+    );
+  };
+
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+    <motion.section
+      className="mx-auto max-w-4xl px-6 py-16"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+    >
       {/* 헤더 섹션 */}
-      <div className="mb-12 text-center">
-        <div className="mb-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-violet-100 to-fuchsia-100 p-2">
-          <HelpCircle className="h-6 w-6 text-violet-600" />
-        </div>
-        <h2 className="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
+      <motion.div className="mb-12 text-center" variants={itemVariants}>
+        <motion.div
+          className="mb-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-violet-100 to-fuchsia-100 p-2"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <motion.div
+            animate={{ rotate: [0, 10, -10, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              repeatDelay: 3,
+            }}
+          >
+            <HelpCircle className="h-6 w-6 text-violet-600" />
+          </motion.div>
+        </motion.div>
+        <motion.h2
+          className="mb-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
+          variants={itemVariants}
+        >
           자주 묻는 질문
-        </h2>
-        <p className="text-muted-foreground mx-auto mt-3 max-w-2xl text-lg">
+        </motion.h2>
+        <motion.p
+          className="text-muted-foreground mx-auto mt-3 max-w-2xl text-lg"
+          variants={itemVariants}
+        >
           서비스 이용 중 궁금한 점에 대한 답변을 찾아보세요
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
       {/* 아코디언 섹션 */}
-      <div className="rounded-3xl border border-gray-100 bg-white/50 p-1 shadow-xl backdrop-blur-sm">
-        <Accordion type="single" collapsible className="w-full">
+      <motion.div
+        className="rounded-3xl border border-gray-100 bg-white/50 p-1 shadow-xl backdrop-blur-sm"
+        variants={itemVariants}
+      >
+        <Accordion type="multiple" value={openItems} className="w-full">
           {FAQS.map((item, i) => {
             const Icon = item.icon;
-            return (
-              <AccordionItem
-                key={i}
-                value={`faq-${i}`}
-                className={`mb-4 overflow-hidden rounded-2xl border-0 bg-gradient-to-r last:mb-0 ${item.gradient} shadow-sm transition-all duration-300 hover:shadow-md`}
-              >
-                <AccordionTrigger className="group px-6 py-5 hover:no-underline">
-                  <div className="flex items-center gap-4 text-left">
-                    <div
-                      className={`rounded-full bg-white/80 p-3 shadow-md ${item.color}`}
-                    >
-                      <Icon className={`h-5 w-5 ${item.color}`} />
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-800 group-hover:text-gray-900">
-                      {item.q}
-                    </h3>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pt-0 pb-6">
-                  <div className="pl-16">
-                    <div className="rounded-xl border border-gray-100 bg-white/80 p-5 shadow-inner backdrop-blur-sm">
-                      <p className="leading-relaxed text-gray-700">{item.a}</p>
-                    </div>
+            const isOpen = openItems.includes(`faq-${i}`);
 
-                    {/* 추가 액션 버튼 */}
-                    <div className="mt-4 flex justify-end">
-                      <button className="inline-flex items-center gap-1 text-sm font-medium text-violet-600 transition-colors hover:text-violet-800">
-                        <Shield className="h-4 w-4" />
-                        <span>더 알아보기</span>
-                      </button>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+            return (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                custom={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+              >
+                <AccordionItem
+                  value={`faq-${i}`}
+                  className={`mb-4 overflow-hidden rounded-2xl border-0 bg-gradient-to-r last:mb-0 ${item.gradient} shadow-sm transition-all duration-300 hover:shadow-md`}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.01 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <AccordionTrigger
+                      onClick={() => handleToggle(`faq-${i}`)}
+                      className="group px-6 py-5 hover:no-underline"
+                    >
+                      <div className="flex items-center gap-4 text-left">
+                        <motion.div
+                          className={`rounded-full bg-white/80 p-3 shadow-md ${item.color}`}
+                          variants={iconVariants}
+                          initial="hidden"
+                          animate="visible"
+                          whileHover="hover"
+                        >
+                          <Icon className={`h-5 w-5 ${item.color}`} />
+                        </motion.div>
+                        <motion.h3
+                          className="text-lg font-semibold text-gray-800 group-hover:text-gray-900"
+                          layout
+                        >
+                          {item.q}
+                        </motion.h3>
+                      </div>
+                    </AccordionTrigger>
+                  </motion.div>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <AccordionContent forceMount>
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="px-6 pb-6"
+                        >
+                          <div className="pl-16">
+                            <motion.div
+                              className="rounded-xl border border-gray-100 bg-white/80 p-5 shadow-inner backdrop-blur-sm"
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1, duration: 0.4 }}
+                            >
+                              <motion.p
+                                className="leading-relaxed text-gray-700"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.2, duration: 0.4 }}
+                              >
+                                {item.a}
+                              </motion.p>
+                            </motion.div>
+
+                            {/* 추가 액션 버튼 */}
+                            <motion.div
+                              className="mt-4 flex justify-end"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.3, duration: 0.4 }}
+                            >
+                              <motion.button
+                                className={`inline-flex items-center gap-1 text-sm font-medium ${item.color} hover:${item.color.replace("-600", "-800")} transition-colors`}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                              >
+                                <motion.div
+                                  variants={pulseVariants}
+                                  animate="pulse"
+                                >
+                                  <Shield className="h-4 w-4" />
+                                </motion.div>
+                                <span>더 알아보기</span>
+                              </motion.button>
+                            </motion.div>
+                          </div>
+                        </motion.div>
+                      </AccordionContent>
+                    )}
+                  </AnimatePresence>
+                </AccordionItem>
+              </motion.div>
             );
           })}
         </Accordion>
-      </div>
+      </motion.div>
 
       {/* 추가 도움말 섹션 */}
-      <div className="mt-10 text-center">
-        <p className="text-muted-foreground">더 궁금한 점이 있으신가요?</p>
-        <button className="mt-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
-          <MessageCircle className="h-4 w-4" />
+      <motion.div
+        className="mt-10 text-center"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+      >
+        <motion.p className="text-muted-foreground" variants={itemVariants}>
+          더 궁금한 점이 있으신가요?
+        </motion.p>
+        <motion.button
+          className="mt-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-3 text-white shadow-lg"
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+          }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          >
+            <MessageCircle className="h-4 w-4" />
+          </motion.div>
           <span className="font-medium">문의하기</span>
-        </button>
-      </div>
-    </section>
+        </motion.button>
+      </motion.div>
+    </motion.section>
   );
 }

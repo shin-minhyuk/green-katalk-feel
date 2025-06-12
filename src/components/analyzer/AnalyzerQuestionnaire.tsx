@@ -105,7 +105,7 @@ const STEPS = [
   {
     id: 6,
     title: "대화 내용 입력",
-    description: "분석하고 싶은 카카오톡 대화 내용을 붙여넣어 주세요.",
+    description: "분석하고 싶은 카카오톡, 인스타 대화 내용을 붙여넣어 주세요.",
     field: "conversation",
     type: "textarea",
     icon: MessageSquare,
@@ -319,7 +319,7 @@ export default function AnalyzerQuestionnaire() {
                       rows={10}
                       autoComplete="off"
                       className="resize-none border-2 border-gray-200 p-4 text-base transition-all duration-300 hover:border-gray-300 focus:border-2 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white"
-                      placeholder="카카오톡 대화 내용을 복사하여 붙여넣어 주세요..."
+                      placeholder="카카오톡, 인스타 대화 내용을 복사하여 붙여넣어 주세요..."
                     />
                   </div>
                 )}
