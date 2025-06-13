@@ -115,7 +115,7 @@ const STEPS = [
   },
 ];
 
-export default function AnalyzerQuestionnaire() {
+export function AnalyzerQuestionnaire() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     relation: "",

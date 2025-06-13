@@ -1,5 +1,5 @@
 import { Header, Footer } from "@/components/common";
-import AnalyzerQuestionnaire from "@/components/analyzer/AnalyzerQuestionnaire";
+import { AnalyzerQuestionnaire } from "@/components/analyzer";
 
 export default function AnalyzerPage() {
   return (
