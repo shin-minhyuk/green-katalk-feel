@@ -9,7 +9,16 @@ interface AnalyzeParams {
   conversation: string;
 }
 
-export const createAnalyzeEmotion = async (data: AnalyzeParams) => {
+export interface AnalyzeResult {
+  signal: string;
+  reason: string;
+  greenie_comment: string;
+  suggested_reply: string;
+}
+
+export const createAnalyzeEmotion = async (
+  data: AnalyzeParams,
+): Promise<AnalyzeResult> => {
   const supabase = createClient();
   const { data: result, error } = await supabase.functions.invoke("openai", {
     body: data,

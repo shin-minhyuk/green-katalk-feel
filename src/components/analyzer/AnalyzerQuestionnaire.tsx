@@ -3,6 +3,7 @@
 import type React from "react";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,7 +36,7 @@ import {
   Bot,
   Sparkles,
 } from "lucide-react";
-import { createAnalyzeEmotion } from "@/apis";
+import { AnalyzeResult, createAnalyzeEmotion } from "@/apis";
 
 const STEPS = [
   {
@@ -117,6 +118,7 @@ const STEPS = [
 ];
 
 export function AnalyzerQuestionnaire() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     relation: "",
@@ -128,8 +130,6 @@ export function AnalyzerQuestionnaire() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-
-  const [, setAnalyzeResult] = useState(null);
 
   const nextStep = () => {
     if (currentStep < STEPS.length - 1) {
@@ -148,18 +148,21 @@ export function AnalyzerQuestionnaire() {
 
     if (isLoading) return;
 
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const result = await createAnalyzeEmotion(formData);
+      const result: AnalyzeResult = await createAnalyzeEmotion(formData);
 
-      // 👉 결과를 페이지에 띄우거나, 상태로 저장해서 보여줘도 됨
-      setAnalyzeResult(result.content);
-      console.log(result.content);
+      const query = new URLSearchParams({
+        signal: result.signal,
+        reason: result.reason,
+        greenie_comment: result.greenie_comment,
+        suggested_reply: result.suggested_reply,
+      }).toString();
+      router.push(`/result?${query}`);
     } catch (error) {
       console.error("분석 실패:", error);
-      // toast나 alert 등으로 사용자에게 알려줄 수도 있어
-    } finally {
       setIsLoading(false);
+      // toast나 alert 등으로 사용자에게 알려줄 수도 있어
     }
   };
 
