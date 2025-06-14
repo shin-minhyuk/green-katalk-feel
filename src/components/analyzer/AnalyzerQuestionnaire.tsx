@@ -36,7 +36,14 @@ import {
   Bot,
   Sparkles,
 } from "lucide-react";
-import { AnalyzeResult, createAnalyzeEmotion } from "@/apis";
+import {
+  AnalyzeResult,
+  createAnalyzeEmotion,
+  saveConversation,
+  saveResult,
+} from "@/apis";
+import { createClient } from "@/utils/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const STEPS = [
   {
@@ -119,6 +126,7 @@ const STEPS = [
 
 export function AnalyzerQuestionnaire() {
   const router = useRouter();
+  const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     relation: "",
@@ -145,13 +153,29 @@ export function AnalyzerQuestionnaire() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (isLoading) return;
 
     setIsLoading(true);
     try {
+      // 1. AI 감정 분석 요청
       const result: AnalyzeResult = await createAnalyzeEmotion(formData);
 
+      try {
+        // 2. 대화 및 결과 DB 저장
+        const supabase = createClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        const userId = user?.id ?? null;
+
+        const conversation = await saveConversation(formData, userId);
+        await saveResult(result, conversation.id, userId);
+      } catch (dbError) {
+        // DB 저장 에러는 로깅만 하고, 사용자 플로우는 계속 진행
+        console.error("DB 저장 실패:", dbError);
+      }
+
+      // 3. 결과 페이지로 이동
       const query = new URLSearchParams({
         signal: result.signal,
         reason: result.reason,
@@ -161,8 +185,13 @@ export function AnalyzerQuestionnaire() {
       router.push(`/result?${query}`);
     } catch (error) {
       console.error("분석 실패:", error);
-      setIsLoading(false);
-      // toast나 alert 등으로 사용자에게 알려줄 수도 있어
+      toast({
+        title: "분석 실패",
+        description:
+          "AI 감정 분석 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+        variant: "destructive",
+      });
+      setIsLoading(false); // 분석 실패 시 로딩 상태 해제
     }
   };
 
