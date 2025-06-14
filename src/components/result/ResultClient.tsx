@@ -208,9 +208,17 @@ export function ResultClient() {
 
   return (
     <AnimatePresence>
+      {!isLoaded && (
+        <div className="flex min-h-[calc(100vh-56px)] w-full items-center justify-center p-4">
+          <p className="text-lg text-gray-600">
+            분석 결과를 불러오는 중입니다...
+          </p>
+        </div>
+      )}
+
       {isLoaded && (
         <motion.main
-          className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 px-4 py-8"
+          className="flex min-h-[calc(100vh-56px)] w-full items-center justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 px-4"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -226,16 +234,7 @@ export function ResultClient() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "linear",
-                  }}
-                >
-                  <Sparkles className="size-4 text-emerald-600" />
-                </motion.div>
+                <Sparkles className="size-4 text-emerald-600" />
                 <span className="text-sm font-medium text-emerald-700">
                   그리니 AI 분석 완료
                 </span>
@@ -287,7 +286,7 @@ export function ResultClient() {
                   </CardHeader>
 
                   <CardContent className="space-y-8 p-8">
-                    {/* 그리니의 종합 분석 */}
+                    {/* 그린이의 종합 분석 */}
                     <motion.div
                       className="space-y-4"
                       initial={{ opacity: 0, x: -50 }}
@@ -302,7 +301,7 @@ export function ResultClient() {
                           transition={{ delay: 0.8, duration: 0.4 }}
                         />
                         <h3 className="text-2xl font-bold text-gray-900">
-                          그리니의 종합 분석
+                          그린이의 종합 분석
                         </h3>
                       </div>
                       <motion.div
