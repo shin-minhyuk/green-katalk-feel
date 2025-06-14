@@ -306,7 +306,7 @@ export function ToneMisunderstanding() {
                           <motion.div
                             className="rounded-full bg-red-100 p-2"
                             whileHover={{ scale: 1.1 }}
-                            animate={{ pulse: [1, 1.05, 1] }}
+                            animate={{ scale: [1, 1.05, 1] }}
                             transition={{
                               duration: 2,
                               repeat: Number.POSITIVE_INFINITY,
