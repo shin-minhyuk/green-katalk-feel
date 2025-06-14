@@ -35,6 +35,7 @@ import {
   Bot,
   Sparkles,
 } from "lucide-react";
+import { createAnalyzeEmotion } from "@/apis";
 
 const STEPS = [
   {
@@ -128,14 +129,7 @@ export function AnalyzerQuestionnaire() {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    // 진행률 계산
-    setProgress(((currentStep + 1) / STEPS.length) * 100);
-  }, [currentStep]);
-
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  const [, setAnalyzeResult] = useState(null);
 
   const nextStep = () => {
     if (currentStep < STEPS.length - 1) {
@@ -149,16 +143,33 @@ export function AnalyzerQuestionnaire() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    console.log("Form Data Submitted: ", formData);
 
-    // 분석 시뮬레이션
-    setTimeout(() => {
+    if (isLoading) return;
+
+    try {
+      setIsLoading(true);
+      const result = await createAnalyzeEmotion(formData);
+
+      // 👉 결과를 페이지에 띄우거나, 상태로 저장해서 보여줘도 됨
+      setAnalyzeResult(result.content);
+      console.log(result.content);
+    } catch (error) {
+      console.error("분석 실패:", error);
+      // toast나 alert 등으로 사용자에게 알려줄 수도 있어
+    } finally {
       setIsLoading(false);
-      // TODO: 실제 API 호출 및 결과 페이지로 이동
-    }, 2000);
+    }
+  };
+
+  useEffect(() => {
+    // 진행률 계산
+    setProgress(((currentStep + 1) / STEPS.length) * 100);
+  }, [currentStep]);
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const currentStepData = STEPS[currentStep];
@@ -249,7 +260,7 @@ export function AnalyzerQuestionnaire() {
                       {currentStepData.title}
                     </Label>
                     <Select
-                      onValueChange={(value) =>
+                      onValueChange={(value: string) =>
                         handleChange(currentStepData.field, value)
                       }
                       defaultValue={
@@ -290,7 +301,7 @@ export function AnalyzerQuestionnaire() {
                       value={
                         formData[currentStepData.field as keyof typeof formData]
                       }
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         handleChange(currentStepData.field, e.target.value)
                       }
                       autoComplete="off"
@@ -313,7 +324,7 @@ export function AnalyzerQuestionnaire() {
                       value={
                         formData[currentStepData.field as keyof typeof formData]
                       }
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                         handleChange(currentStepData.field, e.target.value)
                       }
                       rows={10}
