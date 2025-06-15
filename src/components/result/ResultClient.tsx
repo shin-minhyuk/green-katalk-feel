@@ -218,7 +218,7 @@ export function ResultClient() {
 
       {isLoaded && (
         <motion.main
-          className="flex min-h-[calc(100vh-56px)] w-full items-center justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 px-4"
+          className="flex min-h-[calc(100vh-56px)] w-full items-center justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 p-4"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
