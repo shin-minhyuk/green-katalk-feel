@@ -20,23 +20,38 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const supabase = createClient();
+
     const checkUser = async () => {
-      const supabase = createClient();
       const {
         data: { user },
       } = await supabase.auth.getUser();
       setUser(user);
+      setIsLoading(false);
     };
+
     checkUser();
+
+    // auth state 변화 감지
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setIsLoading(false);
+    });
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleKakaoLogin = async () => {
@@ -55,13 +70,13 @@ export function Header() {
   const handleSignOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    setUser(null);
-    window.location.href = "/"; // 메인 페이지로 리디렉션하며 새로고침
   };
 
   const displayName = user?.user_metadata?.name || user?.email;
 
-  const authButtonDesktop = user ? (
+  const authButtonDesktop = isLoading ? (
+    <div className="h-9 w-20"></div>
+  ) : user ? (
     <div className="flex items-center gap-2">
       <span className="text-sm font-medium text-gray-700">{displayName}님</span>
       <Button
@@ -86,7 +101,11 @@ export function Header() {
     </Button>
   );
 
-  const authButtonMobile = user ? (
+  const authButtonMobile = isLoading ? (
+    <div className="mt-6 border-t border-green-100 pt-4 text-center">
+      <div className="h-16 w-full"></div>
+    </div>
+  ) : user ? (
     <div className="mt-6 border-t border-green-100 pt-4 text-center">
       <span className="text-md font-semibold text-gray-800">
         {displayName}님, 환영합니다!
@@ -168,7 +187,6 @@ export function Header() {
             >
               <BarChart2 className="h-4 w-4" />
               <span>감정 분석하기</span>
-              <Sparkles className="ml-2 h-3 w-3" />
             </Link>
           </Button>
           {authButtonDesktop}
