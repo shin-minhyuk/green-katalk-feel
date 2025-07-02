@@ -8,6 +8,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import Link from "next/link";
 
 const STEPS = [
   {
@@ -199,10 +200,13 @@ export function HowItWorksSection() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <button className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-green-500 px-8 py-4 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <Link
+            href={"/analyzer"}
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-green-500 px-8 py-4 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+          >
             <BrainCircuit className="h-5 w-5" />
             <span className="font-semibold">지금 바로 분석해보기</span>
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

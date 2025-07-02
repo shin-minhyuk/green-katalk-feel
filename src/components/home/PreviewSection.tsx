@@ -12,6 +12,7 @@ import {
   Heart,
   Zap,
 } from "lucide-react";
+import Link from "next/link";
 
 const PREVIEW = [
   {
@@ -256,11 +257,14 @@ export function PreviewSection() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-8 py-4 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <Link
+            href={"/analyzer"}
+            className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-8 py-4 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+          >
             <TrendingUp className="h-5 w-5" />
             <span className="font-semibold">내 메시지 감정 온도 측정하기</span>
             <span className="text-xl">🌡️</span>
-          </div>
+          </Link>
         </motion.div>
       </div>
     </section>

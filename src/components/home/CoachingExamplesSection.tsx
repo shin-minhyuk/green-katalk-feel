@@ -65,16 +65,17 @@ export function CoachingExamplesSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="mb-16 text-center"
       >
-        <div className="inline-flex items-center justify-center p-2 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full mb-4">
-          <Sparkles className="w-6 h-6 text-green-600" />
+        <div className="mb-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-green-100 to-emerald-100 p-2">
+          <Sparkles className="h-6 w-6 text-green-600" />
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4">
+        <h2 className="mb-4 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
           이렇게 말해보는 건 어때요?
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          AI가 분석한 감정 온도를 바탕으로 더 따뜻한 소통 방법을 제안해드려요
+        <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+          그린이가 분석한 감정 온도를 바탕으로 더 따뜻한 소통 방법을
+          제안해드려요
         </p>
       </motion.div>
 
@@ -91,11 +92,11 @@ export function CoachingExamplesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
                 viewport={{ once: true }}
-                className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300"
+                className="rounded-3xl border border-gray-100 bg-white/60 p-8 shadow-xl backdrop-blur-sm transition-all duration-300 hover:shadow-2xl"
               >
                 {/* 카테고리 태그 */}
-                <div className="flex justify-center mb-6">
-                  <span className="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-medium rounded-full">
+                <div className="mb-6 flex justify-center">
+                  <span className="rounded-full bg-gradient-to-r from-green-500 to-emerald-500 px-3 py-1 text-xs font-medium text-white">
                     {category} 개선 사례
                   </span>
                 </div>
@@ -111,10 +112,10 @@ export function CoachingExamplesSection() {
                     className="flex justify-start"
                   >
                     <div className="relative max-w-xs">
-                      <div className="bg-gradient-to-r from-gray-100 to-gray-50 text-gray-800 px-6 py-4 rounded-2xl shadow-sm border border-gray-200">
+                      <div className="rounded-2xl border border-gray-200 bg-gradient-to-r from-gray-100 to-gray-50 px-6 py-4 text-gray-800 shadow-sm">
                         <p className="font-medium">{original}</p>
                       </div>
-                      <div className="absolute -bottom-2 left-4 w-4 h-4 bg-gray-100 rotate-45 border-r border-b border-gray-200"></div>
+                      <div className="absolute -bottom-2 left-4 h-4 w-4 rotate-45 border-r border-b border-gray-200 bg-gray-100"></div>
                     </div>
                   </motion.div>
 
@@ -127,15 +128,15 @@ export function CoachingExamplesSection() {
                     className="flex items-center justify-center"
                   >
                     <div
-                      className={`flex items-center gap-3 px-4 py-3 rounded-full ${getSeverityColor(severity)} border border-current/20`}
+                      className={`flex items-center gap-3 rounded-full px-4 py-3 ${getSeverityColor(severity)} border border-current/20`}
                     >
-                      <div className="p-1.5 bg-white/80 rounded-full">
+                      <div className="rounded-full bg-white/80 p-1.5">
                         <Bot
-                          className={`w-4 h-4 ${getSeverityColor(severity)}`}
+                          className={`h-4 w-4 ${getSeverityColor(severity)}`}
                         />
                       </div>
                       <span className="text-sm font-medium">{comment}</span>
-                      <SeverityIcon className="w-4 h-4" />
+                      <SeverityIcon className="h-4 w-4" />
                     </div>
                   </motion.div>
 
@@ -147,8 +148,8 @@ export function CoachingExamplesSection() {
                     viewport={{ once: true }}
                     className="flex justify-center"
                   >
-                    <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full shadow-lg">
-                      <ArrowRight className="w-5 h-5 text-white" />
+                    <div className="rounded-full bg-gradient-to-r from-green-500 to-emerald-500 p-3 shadow-lg">
+                      <ArrowRight className="h-5 w-5 text-white" />
                     </div>
                   </motion.div>
 
@@ -161,10 +162,10 @@ export function CoachingExamplesSection() {
                     className="flex justify-end"
                   >
                     <div className="relative max-w-xs">
-                      <div className="bg-gradient-to-r from-green-100 to-emerald-50 text-green-900 px-6 py-4 rounded-2xl shadow-sm border border-green-200">
+                      <div className="rounded-2xl border border-green-200 bg-gradient-to-r from-green-100 to-emerald-50 px-6 py-4 text-green-900 shadow-sm">
                         <p className="font-medium">{suggestion}</p>
                       </div>
-                      <div className="absolute -bottom-2 right-4 w-4 h-4 bg-green-100 rotate-45 border-r border-b border-green-200"></div>
+                      <div className="absolute right-4 -bottom-2 h-4 w-4 rotate-45 border-r border-b border-green-200 bg-green-100"></div>
                     </div>
                   </motion.div>
                 </div>
@@ -175,15 +176,15 @@ export function CoachingExamplesSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.2 + 0.5 }}
                   viewport={{ once: true }}
-                  className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 border border-blue-100"
+                  className="mt-6 rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4"
                 >
-                  <div className="flex items-center gap-2 mb-2">
-                    <ThumbsUp className="w-4 h-4 text-blue-600" />
+                  <div className="mb-2 flex items-center gap-2">
+                    <ThumbsUp className="h-4 w-4 text-blue-600" />
                     <span className="text-sm font-semibold text-blue-800">
                       개선 포인트
                     </span>
                   </div>
-                  <p className="text-sm text-blue-700 leading-relaxed">
+                  <p className="text-sm leading-relaxed text-blue-700">
                     {idx === 0 &&
                       "감정을 더 구체적으로 표현하고 이모지를 활용해 친근함을 더했어요."}
                     {idx === 1 &&
@@ -194,7 +195,7 @@ export function CoachingExamplesSection() {
                 </motion.div>
               </motion.div>
             );
-          }
+          },
         )}
       </div>
 
@@ -204,12 +205,12 @@ export function CoachingExamplesSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mt-16"
+        className="mt-16 text-center"
       >
-        <div className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
-          <Bot className="w-5 h-5" />
+        <div className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 px-8 py-4 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <Bot className="h-5 w-5" />
           <span className="font-semibold">내 메시지도 분석해보기</span>
-          <Sparkles className="w-4 h-4" />
+          <Sparkles className="h-4 w-4" />
         </div>
       </motion.div>
     </section>

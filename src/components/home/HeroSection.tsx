@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Bot,
-  Sparkles,
   MessageCircle,
   Heart,
   TrendingUp,
@@ -176,9 +175,8 @@ export function HeroSection() {
               ></motion.div>
             </div>
             <span className="text-sm font-semibold text-green-700">
-              🌱 연애코치 그린이와 함께하는 감정 분석
+              연애코치 그린이와 함께하는 감정 분석
             </span>
-            <Sparkles className="h-4 w-4 text-green-600" />
           </div>
         </motion.div>
 
@@ -227,10 +225,14 @@ export function HeroSection() {
             카카오톡 속 말투, 감정, 뉘앙스까지!
           </span>
           <br />
-          AI가 대화의 진짜 의미를 읽어드립니다. 🔍✨
+          그린이가 대화의 진짜 의미를 읽어드립니다. 🔍✨
           <br />
           <span className="font-medium text-green-600">
             더 이상 오해하지 마세요!
+          </span>
+          <br />
+          <span className="font-medium text-green-600">
+            그린라이트가 되는순간까지!
           </span>
         </motion.p>
 
@@ -249,7 +251,6 @@ export function HeroSection() {
             <Link href="/analyzer" className="flex items-center gap-2">
               <MessageCircle className="h-5 w-5" />
               감정 분석하러 가기
-              <Sparkles className="h-4 w-4" />
             </Link>
           </Button>
 
@@ -261,7 +262,7 @@ export function HeroSection() {
           >
             <Link href="/guide" className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
-              사용법 알아보기
+              그린이의 눈치코치
             </Link>
           </Button>
         </motion.div>
