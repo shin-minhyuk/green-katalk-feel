@@ -79,7 +79,7 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-[calc(100vh-56px)] flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
+      className="relative top-[70px] flex min-h-[calc(100vh-70px)] flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
     >
       {/* 배경 그라데이션 */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50"></div>
@@ -175,7 +175,7 @@ export function HeroSection() {
               ></motion.div>
             </div>
             <span className="text-sm font-semibold text-green-700">
-              연애코치 그린이와 함께하는 감정 분석
+              🌱 연애코치 그린이와 함께하는 감정 분석
             </span>
           </div>
         </motion.div>
@@ -229,10 +229,6 @@ export function HeroSection() {
           <br />
           <span className="font-medium text-green-600">
             더 이상 오해하지 마세요!
-          </span>
-          <br />
-          <span className="font-medium text-green-600">
-            그린라이트가 되는순간까지!
           </span>
         </motion.p>
 

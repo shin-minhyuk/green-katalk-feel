@@ -20,9 +20,11 @@ export default function GuidePage() {
   return (
     <>
       <Header />
-      <ToneMisunderstanding />
-      <ContextualTipTabs />
-      <FaqAccordion />
+      <main className="mt-[70px] min-h-[calc(100vh-70px)] bg-gray-50">
+        <ToneMisunderstanding />
+        <ContextualTipTabs />
+        <FaqAccordion />
+      </main>
       <Footer />
     </>
   );

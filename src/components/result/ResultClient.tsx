@@ -154,7 +154,7 @@ export function ResultClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="mt-[70px] min-h-[calc(100vh-70px)] bg-gray-50">
       <div className="mx-auto max-w-3xl p-4 sm:p-6 md:p-8">
         <Card className="overflow-hidden rounded-2xl border-0 shadow-2xl backdrop-blur-sm">
           <CardHeader className={`${bgColor} p-6`}>

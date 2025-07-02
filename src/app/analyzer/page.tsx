@@ -16,7 +16,7 @@ export default function AnalyzerPage() {
   return (
     <>
       <Header />
-      <main className="container mx-auto max-w-5xl px-4 py-12">
+      <main className="mx-auto mt-[70px] min-h-[calc(100vh-70px)] max-w-5xl px-4 py-12">
         <AnalyzerQuestionnaire />
       </main>
       <Footer />
