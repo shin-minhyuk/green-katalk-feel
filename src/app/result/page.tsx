@@ -1,6 +1,22 @@
 import { Footer, Header } from "@/components/common";
 import { ResultClient } from "@/components/result/ResultClient";
+import type { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "AI 대화 분석 결과 - 그리니",
+  description:
+    "AI가 분석한 대화의 감정 신호, 상세 분석, 추천 답장을 확인해보세요.",
+  openGraph: {
+    title: "AI 대화 분석 결과 - 그리니",
+    description: "AI가 분석한 당신의 대화, 지금 바로 확인해보세요!",
+  },
+  // 검색 결과에 노출되지 않도록 설정 (개인 결과 페이지이므로)
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function ResultPage() {
   return (
